@@ -1,0 +1,30 @@
+{% extends 'home.html' %}
+<!--zawiera home.html-->
+{%block game%}
+{% if category_game%}
+    <div class="row">
+        {%for game in category_game%}
+        <div class="col-lg-4">
+            <img class="images" src="/images/{{game.image}}" alt="image">
+            <div class="card-body">
+                <h5><a class="tittle-game" href="/game/{{game.id}}">{{game.name}}</a></h5>
+                <hr>
+                <h6 class="mb-1">Kategorie :</h6>
+                {%for cat in game.category.all%}
+                <a class="category" href="/category/{{cat.id}}">{{cat.name}}</a>
+                {%endfor%}
+                <br>
+                <h6 class="mb-1">Platformy :</h6>
+                {%for plat in game.platform.all%}
+                <a class="platform" href="/platform/{{plat.id}}">{{plat.name}}</a>
+                {%endfor%}
+                <br>
+                <h6>Cena około :</h6>
+                <a class="price">{{game.price}}<a>
+            </div>
+        </div>
+        {%endfor%}
+    </div>
+{%else%}
+{%endif%}
+{%endblock game%}

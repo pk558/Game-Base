@@ -1,3 +1,3 @@
 # Game-Base
-Website of popular games with their categories and prices.
-Project created with my friend to learn django basics.
+Game-base is a simple project created with django and bootstrap to learn django basics.
+

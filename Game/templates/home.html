@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+
+<html>
+{%load static%}
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Game-Info</title>
+    <meta name="author" content="Maciej Durok">
+    <meta name="description" content="Game-Info it's website where u can find popular games and check average price.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
+    </script>
+    <link rel="stylesheet" type="text/css" href="{% static '/css/style.css' %}">
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light  sticky-top top-background">
+        <a class="navbar-brand" href="/">Game-Info</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Home <span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle menu-color" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Category
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        {% for cat in category%}
+                        <a class="dropdown-item" href="/category/{{cat.id}}">{{cat.name}}</a>
+                        {%endfor%}
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Platform
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        {%for plat in platform%}
+                        <a class="dropdown-item" href="/platform/{{plat.id}}">{{plat.name}}</a>
+                        {%endfor%}
+                    </div>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn top-btn my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+    <div class="container">
+    {%block game%}
+        <div class="row">
+            {%for game in games%}
+            <div class="col-lg-4">
+                <img class="images" src="/images/{{game.image}}" alt="image">
+                <div class="card-body">
+                    <h5><a class="tittle-game" href="/game/{{game.id}}">{{game.name}}</a></h5>
+                    <hr>
+                    <h6 class="mb-1">Kategorie :</h6>
+                    {%for cat in game.category.all%}
+                    <a class="category" href="/category/{{cat.id}}">{{cat.name}}</a>
+                    {%endfor%}
+                    <br>
+                    <h6 class="mb-1">Platformy :</h6>
+                    {%for plat in game.platform.all%}
+                    <a class="platform" href="/platform/{{plat.id}}">{{plat.name}}</a>
+                    {%endfor%}
+                    <br>
+                    <h6>Cena około :</h6>
+                    <a class="price">{{game.price}}<a>
+                </div>
+            </div>
+            {%endfor%}
+        </div>
+        {%endblock game%}
+    </div>
+
+
+</body>
+
+</html>

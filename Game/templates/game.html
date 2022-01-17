@@ -1,0 +1,34 @@
+{% extends 'home.html' %}
+<!--zawiera home.html-->
+
+
+
+
+{%block game%}
+    <div class="row  justify-content-end align-items-end">
+        <div class="col-xl-6">
+            <img src="/images/{{game_user.image}}" class="img" width="100%" alt="image">
+        </div>
+        <div class="col-xl-6 game">
+            <h1>{{game_user.name}}</h1>
+            <h4>Kategorie</h4>
+            {%for cat in game_user.category.all%}
+            <a class="category align-middle" href="/category/{{cat.id}}">{{cat.name}}</a>
+            {%endfor%}
+            <h4>Platformy</h4>
+            {%for plat in game_user.platform.all%}
+            <a class="platform align-middle" href="/platform/{{plat.id}}">{{plat.name}}</a>
+            {%endfor%}
+            <button class="btn  price-btn" type="submit">Cena to około : {{game_user.price}}</button>
+        </div>
+        <div class="col-xl-12 description">
+            {%if game_user.description%}
+            <h2>Opis</h2>
+            {{game_user.description}}
+            {%endif%}
+            <br />
+        </div>
+        <br>
+    </div>
+
+{%endblock game%}
